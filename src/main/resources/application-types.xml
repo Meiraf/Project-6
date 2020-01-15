@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<types:mule xmlns:types="http://www.mulesoft.org/schema/mule/types">
+  <types:catalog>
+    <types:type name="GetAllUsers" format="json">
+      <types:shape format="weave" example="examples/users-5.json"><![CDATA[%dw 2.0
+
+type GetAllUsers = Array<{|  id: Number {"typeId": "int"},   first: String,   last: String,   department: String|}> {"example": "[{\\\"id\\\":1,\\\"first\\\":\\\"Adam\\\",\\\"last\\\":\\\"Bob\\\",\\\"department\\\":\\\"IIB\\\"},{\\\"id\\\":1,\\\"first\\\":\\\"Adam\\\",\\\"last\\\":\\\"Bob\\\",\\\"department\\\":\\\"IIB\\\"},{\\\"id\\\":1,\\\"first\\\":\\\"Martin\\\",\\\"last\\\":\\\"Bob\\\",\\\"department\\\":\\\"IIB\\\"}]"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="CreatAUser" format="json">
+      <types:shape format="weave" example="examples/UserNoID.json"><![CDATA[%dw 2.0
+
+type CreatAUser = {|
+  first: String, 
+  last: String, 
+  department: String
+|} {"example": "{\\\"first\\\":\\\"Adam\\\",\\\"last\\\":\\\"Bob\\\",\\\"department\\\":\\\"IIB\\\"}"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="GetASingleUser" format="json">
+      <types:shape format="weave" example="examples/UserID.json"><![CDATA[%dw 2.0
+
+type GetASingleUser = {|
+  id: Number {"typeId": "int"}, 
+  first: String, 
+  last: String, 
+  department: String
+|} {"example": "{\\\"id\\\":1,\\\"first\\\":\\\"Adam\\\",\\\"last\\\":\\\"Bob\\\",\\\"department\\\":\\\"IIB\\\"}"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="UpdateUser" format="json">
+      <types:shape format="weave" example="examples/UserID-1.json"><![CDATA[%dw 2.0
+
+type UpdateUser = {|
+  id: Number {"typeId": "int"}, 
+  first: String, 
+  last: String, 
+  department: String
+|} {"example": "{\\\"id\\\":1,\\\"first\\\":\\\"Adam\\\",\\\"last\\\":\\\"Bob\\\",\\\"department\\\":\\\"IIB\\\"}"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="DeleteUser" format="json">
+      <types:shape format="weave" example="examples/UserID-2.json"><![CDATA[%dw 2.0
+
+type DeleteUser = {|
+  id: Number {"typeId": "int"}, 
+  first: String, 
+  last: String, 
+  department: String
+|} {"example": "{\\\"id\\\":1,\\\"first\\\":\\\"Adam\\\",\\\"last\\\":\\\"Bob\\\",\\\"department\\\":\\\"IIB\\\"}"}
+
+]]></types:shape>
+    </types:type>
+  </types:catalog>
+  <types:enrichment select="#4c094190-2fc6-4ef3-80d0-246b781b0d2e">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="GetAllUsers"/>
+        </types:message>
+      </types:input-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#e45f54f1-9dac-4a28-85e8-06beebb4c07a">
+    <types:processor-declaration>
+      <types:output-event>
+        <types:message>
+          <types:payload type="GetAllUsers"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#855d38a9-dfaa-4f04-a475-0c10e337c90b">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="CreatAUser"/>
+        </types:message>
+      </types:input-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#569b3ed3-f622-451e-9489-c6c3db251c84">
+    <types:processor-declaration>
+      <types:output-event>
+        <types:message>
+          <types:payload type="CreatAUser"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#b4852ffa-b472-4a98-8dbc-54c81ccde593">
+    <types:processor-declaration>
+      <types:output-event>
+        <types:message>
+          <types:payload type="GetASingleUser"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#47f03132-ef20-495f-bef6-f1b7fd14f917">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="UpdateUser"/>
+        </types:message>
+      </types:input-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#74e2369e-19d5-4dc8-84df-4b3b11dd3036">
+    <types:processor-declaration>
+      <types:output-event>
+        <types:message>
+          <types:payload type="UpdateUser"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+</types:mule>

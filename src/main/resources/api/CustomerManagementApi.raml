@@ -1,0 +1,63 @@
+#%RAML 1.0
+baseUri: https://anypoint.mulesoft.com/mocking/api/v1/links/2089bf0b-5f53-4d5b-b18f-4fd1958d8b99/ # 
+title: Customer Management API
+
+types:
+  users: !include dataTypes/usersdataType.raml
+/users:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            type: users [] 
+            examples: 
+              output: !include examples/UsersExample.raml
+  post:
+    responses:
+      201:
+        body:
+          application/json:
+            example:
+              message: user created
+    body:
+      application/json:
+        type: users 
+        examples: 
+          input: !include examples/UserNOIDexample.raml
+
+  /{id}:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: users
+              examples:
+                output: !include examples/UserExample.raml              
+    delete:
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                message: user deleted
+    put:
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                message: user updated! 
+      body:
+        application/json:
+          type: users
+          examples:
+            input: !include examples/UserNOIDexample.raml
+
+
+          
+        
+          
+                
+              
